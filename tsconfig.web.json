@@ -1,0 +1,8 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "types": []
+  },
+  "include": ["src/core/**/*.ts", "src/gl/**/*.ts", "src/shaders/**/*.ts", "src/ui/**/*.ts", "src/encode/**/*.ts", "src/storage/**/*.ts"]
+}

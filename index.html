@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>路径追踪工作室</title>
+  </head>
+  <body>
+    <div id="app">
+      <header class="topbar">
+        <h1 class="title">路径追踪工作室</h1>
+        <span id="renderer-badge" class="badge badge-muted">检测中</span>
+        <span id="visibility-hint" class="badge badge-warn" hidden>页面在后台，渲染已节流</span>
+      </header>
+      <main class="layout">
+        <section class="stage">
+          <canvas id="canvas" width="480" height="270"></canvas>
+          <div id="empty-hint" class="empty-hint">
+            <p class="empty-title">准备就绪</p>
+            <p class="empty-sub">选择参数后点击开始，画面会随采样数由噪变净</p>
+          </div>
+        </section>
+        <aside class="sidebar">
+          <section class="card">
+            <h2 class="card-title">渲染参数</h2>
+            <div class="field">
+              <label for="preset">预设</label>
+              <select id="preset">
+                <option value="preview">preview · 480p / 8 帧 / 32 SPP</option>
+                <option value="demo" selected>demo · 480p / 40 帧 / 256 SPP</option>
+                <option value="final">final · 480p / 40 帧 / 512 SPP</option>
+              </select>
+            </div>
+            <div class="field-grid">
+              <div class="field">
+                <label for="frame-count">帧数</label>
+                <input id="frame-count" type="number" min="1" max="240" value="40" />
+              </div>
+              <div class="field">
+                <label for="target-spp">目标 SPP</label>
+                <input id="target-spp" type="number" min="4" max="4096" step="4" value="256" />
+              </div>
+            </div>
+            <div class="field-grid">
+              <div class="field">
+                <label for="width">宽</label>
+                <input id="width" type="number" min="64" max="2048" step="2" value="854" />
+              </div>
+              <div class="field">
+                <label for="height">高</label>
+                <input id="height" type="number" min="64" max="2048" step="2" value="480" />
+              </div>
+            </div>
+            <div class="field">
+              <label for="shutter">快门占比 <span id="shutter-val">0.70</span></label>
+              <input id="shutter" type="range" min="0" max="1" step="0.05" value="0.7" />
+            </div>
+            <div class="actions">
+              <button id="btn-start" class="btn btn-primary">开始</button>
+              <button id="btn-stop" class="btn" disabled>停止</button>
+            </div>
+            <p id="error-text" class="error-text" hidden></p>
+          </section>
+
+          <section class="card">
+            <h2 class="card-title">时间线</h2>
+            <div id="timeline" class="timeline"></div>
+            <p id="progress-text" class="progress-text">未开始</p>
+          </section>
+
+          <section class="card">
+            <h2 class="card-title">导出</h2>
+            <div class="actions">
+              <button id="btn-png" class="btn" disabled>导出 PNG 序列</button>
+              <button id="btn-video" class="btn" disabled>导出 WebM</button>
+            </div>
+            <p id="export-status" class="progress-text"></p>
+          </section>
+        </aside>
+      </main>
+    </div>
+    <script type="module" src="/src/ui/main.ts"></script>
+  </body>
+</html>
